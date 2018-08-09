@@ -23,4 +23,7 @@ req.on('error', (error) => {
 	console.error(`problem with request: ${e.message}`);
 });
 
-req.end();
+exports.getFolders = (request, response) => {
+	req.end();
+	response.status(200).end();
+};
