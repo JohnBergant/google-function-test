@@ -1,27 +1,18 @@
 var https = require('https');
+const resource = require('@google-cloud/resource');
+const projectId = 'fluted-protocol-212821'
 
-const options = {
-		method: "GET",
-		host: "cloudresourcemanager.googleapis.com",
-		path: "/v2beta1/folders/957776435343",
-		timeout: "30000"
-}
+const resourceClient = new Resource({
+	projectId: projectId
+});
 
 exports.getFolders = (request, response) => {
-	var req = https.request(options, (res) => {
-		res.on('data', (chunk) => { 
-			response.write(JSON.parse(chunk)); 
-		});
-		responseCode = res.statusCode;
-	});
-	
-	req.on('error', (error) => {
-		response.write(error.message);
-		responseCode = 500;
-	});
-
-	req.end();
-	
-	response.statusCode = responseCode;
-	response.end();
+  resourceClient.getProjects().then(
+    results => {
+      const projects = results[0];
+      projects.forEach(project => request.write(project.id));
+    })
+    .catch(err => {
+      request.write(err.message);
+    });
 };
