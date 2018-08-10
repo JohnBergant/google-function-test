@@ -21,10 +21,10 @@ exports.getFolders = (request, response) => {
 		rawData = error.message;
 		response.write(error.message);
 	});
+
+	req.end();
 	
 	response.write(rawData);
 	response.statusCode = responseCode;
 	response.end();
-
-	req.end();
 };
