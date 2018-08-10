@@ -8,11 +8,10 @@ const options = {
 }
 
 exports.getFolders = (request, response) => {
-	let rawData = '';
-	let responseCode = 0;
-
 	var req = https.request(options, (res) => {
-		res.on('data', (chunk) => { rawData += chunk; });
+		res.on('data', (chunk) => { 
+			response.write(JSON.parse(chunk)); 
+		});
 		responseCode = res.statusCode;
 	});
 	
