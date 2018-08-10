@@ -11,7 +11,7 @@ exports.getFolders = (request, response) => {
 	let rawData = '';
 	let responseCode = 0;
 
-	var req = https.getrequest(options, (res) => {
+	var req = https.request(options, (res) => {
 		res.on('data', (chunk) => { rawData += chunk; });
 	});
 	
