@@ -13,10 +13,9 @@ exports.getFolders = (request, response) => {
 
 	var req = https.request(options, (res) => {
 		res.on('data', (chunk) => { rawData += chunk; });
+		responseCode = res.statusCode;
 	});
 	
-	responseCode = res.statusCode;
-
 	req.on('error', (error) => {
 		rawData = error.message;
 		response.write(error.message);
