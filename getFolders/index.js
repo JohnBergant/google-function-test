@@ -9,21 +9,20 @@ const options = {
 		timeout: "30000"
 }
 
-const req = https.request(options, (res) => {
-	res.setEncoding('utf8');
-	res.on('data', (chunk) => {
-		console.log(`BODY: ${chunk}`);
-	});
-	res.on('end', () => {
-		console.log("No more data in response.");
-	});
-});
-
-req.on('error', (error) => {
-	console.error(`problem with request: ${e.message}`);
-});
-
 exports.getFolders = (request, response) => {
-	req.end();
-	response.status(200).end();
+	response.setEncoding('utf8');
+
+	var req = https.request(options, (res) => {
+		res.on('data', (chunk) => {
+			response.write(chunk);
+		});
+		response.status(200);
+	});
+	
+	req.on('error', (error) => {
+		response.write(error.message);
+		response.status(500);
+	});
+
+	response.end();
 };
