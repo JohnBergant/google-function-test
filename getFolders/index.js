@@ -20,7 +20,6 @@ exports.getFolders = (request, response) => {
 	req.on('error', (error) => {
 		rawData = error.message;
 		response.write(error.message);
-		responseCode = 500;
 	});
 	
 	response.write(rawData);
