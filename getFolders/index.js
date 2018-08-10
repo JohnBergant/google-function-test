@@ -1,7 +1,5 @@
 var https = require('https');
 
-var url = "https://cloudresourcemanager.googleapis.com/v2beta1/folders/957776435343"
-
 const options = {
 		method: "GET",
 		host: "cloudresourcemanager.googleapis.com",
@@ -11,7 +9,7 @@ const options = {
 
 exports.getFolders = (request, response) => {
 	let rawData = '';
-	let responseCode = 200;
+	let responseCode = 0;
 
 	var req = https.getrequest(options, (res) => {
 		res.on('data', (chunk) => { rawData += chunk; });
@@ -25,9 +23,9 @@ exports.getFolders = (request, response) => {
 		responseCode = 500;
 	});
 	
-	response.write("TESTING!!!");
+	response.write(rawData);
 	response.statusCode = responseCode;
-	response.end();i
+	response.end();
 
 	req.end();
 };
