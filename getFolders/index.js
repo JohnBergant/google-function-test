@@ -10,8 +10,6 @@ const options = {
 }
 
 exports.getFolders = (request, response) => {
-	response.setEncoding('utf8');
-
 	var req = https.request(options, (res) => {
 		res.on('data', (chunk) => {
 			response.write(chunk);
