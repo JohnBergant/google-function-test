@@ -2,7 +2,7 @@ var https = require('https');
 const resource = require('@google-cloud/resource');
 const projectId = 'fluted-protocol-212821'
 
-const resourceClient = new Resource({
+const resourceClient = new resource({
 	projectId: projectId
 });
 
