@@ -13,7 +13,7 @@ exports.getFolders = (request, response) => {
 	let rawData = '';
 	let responseCode = 200;
 
-	var req = https.request(options, (res) => {
+	var req = https.getrequest(options, (res) => {
 		res.on('data', (chunk) => { rawData += chunk; });
 	});
 	
@@ -27,5 +27,7 @@ exports.getFolders = (request, response) => {
 	
 	response.write("TESTING!!!");
 	response.statusCode = responseCode;
-	response.end();
+	response.end();i
+
+	req.end();
 };
