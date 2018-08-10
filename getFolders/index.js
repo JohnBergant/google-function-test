@@ -17,11 +17,11 @@ exports.getFolders = (request, response) => {
 	
 	req.on('error', (error) => {
 		response.write(error.message);
+		responseCode = 500;
 	});
 
 	req.end();
 	
-	response.write(rawData);
 	response.statusCode = responseCode;
 	response.end();
 };
