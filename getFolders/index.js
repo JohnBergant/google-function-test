@@ -10,17 +10,22 @@ const options = {
 }
 
 exports.getFolders = (request, response) => {
+	let rawData = '';
+	let responseCode = 200;
+
 	var req = https.request(options, (res) => {
-		res.on('data', (chunk) => {
-			response.write(chunk);
-		});
-		response.status(200);
+		res.on('data', (chunk) => { rawData += chunk; });
 	});
 	
-	req.on('error', (error) => {
-		response.write(error.message);
-		response.status(500);
-	});
+	responseCode = res.statusCode;
 
+	req.on('error', (error) => {
+		rawData = error.message;
+		response.write(error.message);
+		responseCode = 500;
+	});
+	
+	response.write(JSON.parse(rawData));	
+	response.statusCode = responseCode;
 	response.end();
 };
