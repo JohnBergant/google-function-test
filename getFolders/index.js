@@ -25,7 +25,7 @@ exports.getFolders = (request, response) => {
 		responseCode = 500;
 	});
 	
-	response.write(JSON.parse(rawData));	
+	response.write("TESTING!!!");
 	response.statusCode = responseCode;
 	response.end();
 };
